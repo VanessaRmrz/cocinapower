@@ -743,7 +743,7 @@ footer p {
 /* Para pantallas grandes (> 1200px) */
 @media (max-width: 1200px) {
   .header {
-    height:13%;
+    height:auto;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
@@ -754,7 +754,7 @@ footer p {
   .container {
    max-width: 100%;       /* Que ocupe el 100% del ancho */
     width: 100%;           /* Forzar que el ancho sea total */
-    margin: 5rem auto 2rem; /* Dejar margen arriba y abajo */
+    margin: 6rem auto 2rem; /* Dejar margen arriba y abajo */
     padding: 20px 15px;    /* Un poco de espacio a los lados para que no quede pegado */
     box-sizing: border-box; /* Para que padding no haga overflow */
   }
@@ -765,6 +765,18 @@ footer p {
     transition: width 0.3s ease;
   }
 
+    .volver-fijo {
+    top: 0px !important;
+    font-size: 0.95rem !important;
+    padding: 5px 10px !important;
+    position: static !important;
+    display: inline-block;
+    margin-right:auto;
+  }
+  .volver-fijo i {
+  font-size: 0.85rem;
+}
+
 }
 
 /* MEDIA QUERY: Tablets y móviles grandes (≤768px) */
@@ -774,7 +786,7 @@ footer p {
     justify-content: space-between;
     align-items: center;
     flex-wrap: nowrap;
-    height:13%;
+    height:auto;
 
     padding: 0.5rem 1rem;
     position:fixed;
@@ -782,7 +794,7 @@ footer p {
   }
 
   .volver-fijo {
-    left: 7rem !important;
+    left: 6rem !important;
     top: 0px !important;
     font-size: 0.85rem !important;
     padding: 5px 10px !important;
@@ -796,7 +808,7 @@ footer p {
   .container {
     max-width: 100%;       /* Que ocupe el 100% del ancho */
     width: 100%;           /* Forzar que el ancho sea total */
-    margin: 5rem auto 2rem; /* Dejar margen arriba y abajo */
+    margin: 5.5rem auto 2rem; /* Dejar margen arriba y abajo */
     padding: 20px 15px;    /* Un poco de espacio a los lados para que no quede pegado */
     box-sizing: border-box; /* Para que padding no haga overflow */
   }
@@ -988,6 +1000,7 @@ footer p {
   }
 
 }
+
 @media (max-width: 600px) {
   .acciones-detalle a,
   .acciones-detalle button {
