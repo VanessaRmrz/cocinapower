@@ -154,7 +154,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   </div>
 
-  <div class="agregar-recomendacion-container">
+  <div class="main-content">
+
 
   <div class="agregar-recomendacion-container">
     <h2>Agregar Receta al Top</h2>
@@ -165,6 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <input name="enlace_youtube" placeholder="URL del video en YouTube (https://...)" required>
       <button type="submit"><i class="fas fa-save"></i> Guardar Receta</button>
     </form>
+  </div>
   </div>
 
   <footer>
