@@ -145,6 +145,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   </div>
 
+<body>
+
+  <div class="main-content">
+
 
   <div class="agregar-recomendacion-container">
     <h2>Agregar Receta Recomendada del Mes</h2>
