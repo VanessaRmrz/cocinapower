@@ -1,46 +1,42 @@
 <?php
 include 'conexion.php';
 
-if (!isset($_GET['id'])) exit('ID no especificado.');
-$id = intval($_GET['id']);
-
-$stmt = $pdo->prepare("SELECT * FROM recetas WHERE id = ? AND tipo = 'top'");
-$stmt->execute([$id]);
-$c = $stmt->fetch(PDO::FETCH_ASSOC);
-
-if (!$c) exit('Receta no encontrada o no es del tipo "top".');
+function extraerIdYoutube($url) {
+    if (preg_match('/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $url, $match)) {
+        return $match[1];
+    }
+    return '';
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titulo = $_POST['titulo'];
-    $autor = $_POST['autor'];
+    $autor = $_POST['autor'] ?? '';
     $descripcion = $_POST['descripcion'];
     $enlace = $_POST['enlace_youtube'];
 
-    parse_str(parse_url($enlace, PHP_URL_QUERY), $url_params);
-    $video_id = $url_params['v'] ?? '';
-    if (!$video_id && preg_match('/youtu\.be\/([a-zA-Z0-9_-]+)/', $enlace, $match)) {
-        $video_id = $match[1];
-    }
-
+    $video_id = extraerIdYoutube($enlace);
     $imagen = $video_id ? "https://img.youtube.com/vi/$video_id/hqdefault.jpg" : '';
 
-    $stmt = $pdo->prepare("UPDATE recetas SET 
-        titulo = ?, 
-        autor = ?, 
-        descripcion = ?, 
-        enlace_youtube = ?, 
-        imagen_url = ? 
-        WHERE id = ? AND tipo = 'top'");
+    $stmtOrden = $pdo->query("SELECT MAX(orden_mes) AS max_orden FROM recetas WHERE tipo = 'top'");
+    $max = $stmtOrden->fetch(PDO::FETCH_ASSOC)['max_orden'] ?? 0;
+    $orden = $max + 1;
+
+    $fecha = date('Y-m-d');
+
+    $stmt = $pdo->prepare("INSERT INTO recetas 
+        (titulo, autor, descripcion, enlace_youtube, imagen_url, tipo, fecha_recomendacion, orden_mes)
+        VALUES (?, ?, ?, ?, ?, 'top', ?, ?)");
     $stmt->execute([
         $titulo,
         $autor,
         $descripcion,
         $enlace,
         $imagen,
-        $id
+        $fecha,
+        $orden
     ]);
 
-    header("Location: detalle.php?id=$id");
+    header('Location: index.php');
     exit;
 }
 ?>
@@ -49,31 +45,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Editar Receta del Top</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Agregar Receta al Top</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="icon.png"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Georgia', serif;
-      background: url('fondo.jpeg') no-repeat center center fixed;
-      background-size: cover;
-      color: #eee;
-      min-height: 100vh;
-    }
 
-    .header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(0,0,0,0.85);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 2rem;
-      z-index: 1000;
-    }
 
     .volver-fijo {
       position: fixed;
@@ -115,20 +94,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       gap: 1.2rem;
     }
 
-.agregar-recomendacion-container input,
-.agregar-recomendacion-container textarea {
-  width: 100%;
-  box-sizing: border-box;
-  background: rgba(255,255,255,0.08);
-  color: #fff;
-  border: 1px solid #ffd363aa;
-  border-radius: 8px;
-  padding: 12px;
-  font-family: 'Georgia', serif;
-  font-size: 1rem;
-  resize: vertical;
-}
-
+    .agregar-recomendacion-container input,
+    .agregar-recomendacion-container textarea {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border: 1px solid #ffd363aa;
+      border-radius: 8px;
+      padding: 12px;
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+      resize: vertical;
+    }
 
     .agregar-recomendacion-container input::placeholder,
     .agregar-recomendacion-container textarea::placeholder {
@@ -146,18 +122,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       cursor: pointer;
       transition: background 0.3s ease;
       box-shadow: 0 0 10px #ff4a4aaa;
-      margin: 0 auto;
     }
 
     .agregar-recomendacion-container button:hover {
       background: #cc0000;
-    }
-
-    .label-text {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: bold;
-      color: #ffd700;
     }
 
     footer {
@@ -168,9 +136,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       color: #ccc;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1200px) {
       .agregar-recomendacion-container {
-        margin: 110px auto 2rem;
+        margin: 130px auto 2rem;
         padding: 1.5rem;
       }
       .volver-fijo {
@@ -184,37 +152,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <div class="header detalle-header">
     <a href="index.php"><img src="logo.png" class="logo" alt="Logo CocinaPower"/></a>
+  <a href="index.php" class="volver-fijo"><i class="fas fa-arrow-left"></i> Volver</a>
+
   </div>
 
-  <a href="detalle.php?id=<?= $id ?>" class="volver-fijo"><i class="fas fa-arrow-left"></i> Volver</a>
+
+
 
   <div class="agregar-recomendacion-container">
-    <h2>Editar Receta del Top</h2>
-
+    <h2>Agregar Receta al Top</h2>
     <form method="post">
-      <label>
-        <span class="label-text">Título:</span>
-        <input name="titulo" required value="<?= htmlspecialchars($c['titulo']) ?>">
-      </label>
-
-      <label>
-        <span class="label-text">Autor:</span>
-        <input name="autor" value="<?= htmlspecialchars($c['autor']) ?>">
-      </label>
-
-      <label>
-        <span class="label-text">Descripción:</span>
-        <textarea name="descripcion" required><?= htmlspecialchars($c['descripcion']) ?></textarea>
-      </label>
-
-      <label>
-        <span class="label-text">URL de YouTube:</span>
-        <input name="enlace_youtube" required value="<?= htmlspecialchars($c['enlace_youtube']) ?>">
-      </label>
-
-      <button type="submit"><i class="fas fa-save"></i> Guardar Cambios</button>
+      <input name="titulo" placeholder="Nombre de la receta" required>
+      <input name="autor" placeholder="Autor de la receta (opcional)">
+      <textarea name="descripcion" placeholder="Descripción o preparación" required></textarea>
+      <input name="enlace_youtube" placeholder="URL del video en YouTube (https://...)" required>
+      <button type="submit"><i class="fas fa-save"></i> Guardar Receta</button>
     </form>
   </div>
+
 
   <footer>
     <p>Curso: Conceptualización de servicios en la nube</p>
