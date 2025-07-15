@@ -147,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
 
-  <div class="main-content">
+
 
 
   <div class="agregar-recomendacion-container">
