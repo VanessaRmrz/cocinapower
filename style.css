@@ -740,6 +740,38 @@ footer p {
 
 /* Responsive ajustes */
 
+/* Para pantallas medianas y grandes (mayores a 768px y hasta 1200px) */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .container {
+    max-width: 90%;  /* que ocupe más del ancho disponible */
+    margin: 5rem auto;
+    padding: 30px 20px; /* un poco menos padding horizontal */
+  }
+
+  .header img.logo {
+    width: 140px; /* reduce un poco el logo para que no se vea gigante */
+    margin-top: 0; /* elimina margen excesivo */
+    transition: width 0.3s ease;
+  }
+}
+
+/* Para pantallas grandes (> 1200px) */
+@media (max-width: 900px) {
+  .container {
+    max-width: 100%;       /* Que ocupe el 100% del ancho */
+    width: 100%;           /* Forzar que el ancho sea total */
+    margin: 5rem auto 2rem; /* Dejar margen arriba y abajo */
+    padding: 20px 15px;    /* Un poco de espacio a los lados para que no quede pegado */
+    box-sizing: border-box; /* Para que padding no haga overflow */
+  }
+
+  .header img.logo {
+    width: 70px !important; /* Igual que en móvil pequeño */
+    margin-top: 0 !important; /* Eliminar margen */
+    transition: width 0.3s ease;
+  }
+
+}
 
 /* MEDIA QUERY: Tablets y móviles grandes (≤768px) */
 @media (max-width: 768px) {
@@ -765,10 +797,17 @@ footer p {
   .volver-fijo i {
   font-size: 0.85rem;
 }
+  .container {
+    max-width: 100%;       /* Que ocupe el 100% del ancho */
+    width: 100%;           /* Forzar que el ancho sea total */
+    margin: 5rem auto 2rem; /* Dejar margen arriba y abajo */
+    padding: 20px 15px;    /* Un poco de espacio a los lados para que no quede pegado */
+    box-sizing: border-box; /* Para que padding no haga overflow */
+  }
 
   .header img.logo {
-    width: 70px ;
-    margin-top: 0 !important;
+    width: 70px !important; /* Igual que en móvil pequeño */
+    margin-top: 0 !important; /* Eliminar margen */
     transition: width 0.3s ease;
   }
 
@@ -813,12 +852,6 @@ footer p {
   .menu a {
     font-size: 0.9rem;
     padding: 6px 12px;
-  }
-
-  .container {
-    width: 100%;
-    margin-top: 1rem;
-    padding: 20px;
   }
 
   .cancion {
