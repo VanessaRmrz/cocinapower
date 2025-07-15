@@ -154,7 +154,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   </div>
 
-  <div class="main-content">
+
+
 
   <div class="agregar-recomendacion-container">
     <h2>Agregar Receta al Top</h2>
@@ -173,6 +174,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <p>Nombre: Vanessa Itzarahí Gómez Ramírez</p>
     <p>&copy; <?= date('Y') ?> Todos los derechos reservados</p>
   </footer>
-  </div>
+
 </body>
 </html>
