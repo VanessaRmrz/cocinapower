@@ -57,9 +57,21 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
       color: #000;
       font-weight: bold;
     }
+        .container {
+      flex: 1;
+      margin: 100px auto 0rem;
+      max-width: 1100px;
+      background: rgba(10, 10, 20, 0.85);
+      border-radius: 14px;
+      box-shadow: 0 0 40px #ff4a4aaa;
+      color: #fff;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
     main {
-      margin: 90px auto 3rem;
+      margin: 100px auto 0px;
       max-width: 1100px;
       padding: 2rem;
       background: rgba(0,0,0,0.8);
@@ -68,11 +80,7 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     .titulo-lista {
-      text-align: center;
-      font-size: 2rem;
-      color: #ffd363;
-      margin-bottom: 2rem;
-      text-shadow: 0 0 6px #ffd363aa;
+margin-bottom: -2rem;
     }
 
     .lista-completa {
@@ -151,7 +159,12 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     @media (max-width: 900px) {
-      
+           .container {
+        flex-direction: column;
+        max-width: 100vw;
+        margin: 100px auto 0rem;
+        padding: 2.5rem 3rem;
+      }
       main {
         padding: 1.5rem;
         margin: 110px auto 2rem;
@@ -184,8 +197,9 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
   </div>
 
+ 
+  <main class="container">
 
-  <main>
     <h1 class="titulo-lista">Lista Completa de Recetas</h1>
     <form id="form-acciones" method="POST">
       <div class="lista-completa">
