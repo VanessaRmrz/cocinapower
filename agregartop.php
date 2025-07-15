@@ -156,7 +156,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <div class="main-content">
 
-
   <div class="agregar-recomendacion-container">
     <h2>Agregar Receta al Top</h2>
     <form method="post">
@@ -167,13 +166,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <button type="submit"><i class="fas fa-save"></i> Guardar Receta</button>
     </form>
   </div>
-  </div>
+
 
   <footer>
     <p>Curso: Conceptualización de servicios en la nube</p>
     <p>Nombre: Vanessa Itzarahí Gómez Ramírez</p>
     <p>&copy; <?= date('Y') ?> Todos los derechos reservados</p>
   </footer>
-
+  </div>
 </body>
 </html>
