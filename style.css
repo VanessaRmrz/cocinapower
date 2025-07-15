@@ -737,9 +737,6 @@ footer p {
   font-weight: 400;
   font-size: 0.9rem;
 }
-.main-content {
-  flex: 1;
-}
 
 /* Responsive ajustes */
 
@@ -990,17 +987,23 @@ footer p {
     height: 140px;
   }
 
-  .container {
-    padding: 16px;
-  }
-
   .lista-completa {
     padding: 16px;
   }
 
+
+    body {
+    display: block !important; /* quita el layout en flex que empuja el footer */
+  }
+
+  .container {
+    margin: 1rem auto 0 auto !important; /* margen arriba normal, cero abajo */
+    padding-bottom: 0 !important;
+  }
+
   footer {
-    font-size: 0.75rem;
-    padding: 0.8rem 0.5rem;
+    margin-top: 0 !important; /* que quede pegado al contenido */
+    padding-top: 1.2rem;
   }
 
 }
