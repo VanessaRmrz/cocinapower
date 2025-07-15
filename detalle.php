@@ -29,6 +29,7 @@ if (!$r) exit('Receta no encontrada');
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      width:  100%;
     }
 
     .acciones-detalle {
@@ -74,8 +75,8 @@ if (!$r) exit('Receta no encontrada');
       text-align: center;
     }
     .miniatura-circular {
-      width: 140px;
-      height: 140px;
+      width: 440px;
+      height: 440px;
       margin: 0 auto 1rem;
       border-radius: 50%;
       overflow: hidden;
@@ -94,7 +95,7 @@ if (!$r) exit('Receta no encontrada');
     }
 
     .detalle-info h2 {
-      font-size: 2.4rem;
+      font-size: 3.4rem;
       color: #ff4a4a;
       margin-bottom: 0.25rem;
       font-weight: 700;
@@ -143,6 +144,7 @@ if (!$r) exit('Receta no encontrada');
       box-shadow: 0 0 30px #ff4a4aaa;
       border: none;
     }
+    
 
     .botonyoutube {
       display: inline-flex;
@@ -177,25 +179,25 @@ if (!$r) exit('Receta no encontrada');
     }
       .container {
         flex-direction: column;
-        max-width: 95vw;
-        margin: 100px auto 2rem;
-        padding: 1.5rem 2rem;
+        max-width: 100vw;
+        margin: 100px auto 0rem;
+        padding: 2.5rem 3rem;
       }
       .detalle-info, .detalle-video {
         max-width: 100%;
         flex: none;
       }
       .detalle-video iframe {
-        height: 240px;
+        height: 500px;
       }
       .detalle-info h2 {
-        font-size: 2rem;
+        font-size: 3rem;
       }
       .detalle-info h3 {
-        font-size: 1.1rem;
+        font-size: 1.7rem;
       }
       .texto-descripcion {
-        font-size: 1rem;
+        font-size: 2rem;
       }
       .botonyoutube {
         font-size: 1rem;
