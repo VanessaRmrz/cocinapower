@@ -742,6 +742,7 @@ footer p {
 
 /* Para pantallas grandes (> 1200px) */
 @media (max-width: 1200px) {
+  
   .header {
     height:auto;
     align-items: center;
