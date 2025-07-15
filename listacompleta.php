@@ -34,19 +34,6 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
       min-height: 100vh;
     }
 
-    .header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(0,0,0,0.85);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 2rem;
-      z-index: 1000;
-    }
-
-
     .acciones-detalle {
       display: flex;
       gap: 1rem;
@@ -164,6 +151,7 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     @media (max-width: 900px) {
+      
       main {
         padding: 1.5rem;
         margin: 110px auto 2rem;
@@ -176,6 +164,8 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
         flex-direction: row;
       }
     }
+
+
   </style>
 </head>
 <body>
