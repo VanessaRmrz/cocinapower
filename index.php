@@ -1,1046 +1,232 @@
-/* Reset básico */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Fondo con imagen */
-    body {
-      margin: 0;
-      font-family: 'Georgia', serif;
-      background: url('fondo.jpeg') no-repeat center center fixed;
-      background-size: cover;
-      color: #eee;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-/* Contenedor principal */
-.container {
-  max-width: 845px;
-  margin: 5rem auto;
-  background-color: rgba(255, 255, 255, 0.92);
-  padding: 30px 40px;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-  padding-top: 0rem; /* Ajustable según el alto real del header */
-  margin-bottom: 2rem;
-}
-
-/* Header: logo a la izquierda, menú a la derecha */
-
-    .header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      height: 60px;
-      background: rgba(0, 0, 0, 0.8);
-      display: flex;
-      align-items: center;
-      padding: 0 2rem;
-      box-sizing: border-box;
-      z-index: 1000;
-      gap: 1rem;
-    }
-.header img.logo {
-  width: 180px;
-  filter: drop-shadow(0 0 3px #ff6c6c);
-  margin-top: 7rem;
-}
-
-
-/* Logo fijo a la izquierda */
-.header-left {
-  flex-shrink: 0;
-}
-
-/* Menú al lado derecho del logo, arriba */
-.header-right {
-  flex-grow: 1;
-  display: flex;
-  justify-content:center;
-  align-items: flex-start;
-  gap: 15px;
-}
-
-.menu {
-  display: flex;
-  gap: 25px;
-  align-items: center;
-  font-weight: 600;
-  font-family: 'Georgia', serif;
-  color: #ffd56b; /* Texto dorado claro */
-  flex-wrap: nowrap;
-  margin-left: auto;
-}
-
-.menu a,
-.menu-item,
-.menu-hamb {
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.menu a {
-  color: #2c1f00;
-  text-decoration: none;
-  font-size: 1.1rem;
-  padding: 8px 18px;
-  border-radius: 10px;
-  background-color: #ffbb33; /* Dorado-naranja vibrante */
-  box-shadow: 0 3px 10px rgba(255, 187, 51, 0.6);
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.menu a:hover {
-  background-color: #ffd56b;
-  color: #1a1200;
-  box-shadow: 0 4px 16px rgba(255, 213, 107, 0.8);
-  border: 2px solid #ffcc33;
-}
-
-.menu-item {
-  position: relative;
-}
-
-.menu-item .submenu-top {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: -0.4rem;
-  background-color: rgba(240, 195, 109, 0.25); /* translúcido dorado */
-  border: 1px solid #ffcc33;
-  box-shadow: 0 4px 12px rgba(255, 204, 51, 0.4);
-  border-radius: 8px;
-  padding: 10px;
-  margin-top: 10px;
-  z-index: 1000;
-}
-
-.menu-item:hover .submenu-top {
-  display: block;
-}
-
-.menu-item .submenu-top a {
-  display: block;
-  color: #3b2a00; /* más oscuro para mejor legibilidad */
-  padding: 6px 12px;
-  font-family: 'Georgia', serif;
-  font-size: 0.95rem;
-  text-decoration: none;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  border-radius: 6px;
-}
-
-.menu-item .submenu-top a:hover {
-  background-color: #ffd56b;
-  color: #2c1f00;
-}
-
-.menu-hamb {
-  color: #2c1f00;
-  background-color: #ffbb33;
-  box-shadow: 0 3px 10px rgba(255, 187, 51, 0.6);
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  cursor: pointer;
-  padding: 8px 12px;
-  font-size: 1.5rem;
-  user-select: none;
-  border-radius: 8px;
-}
-
-.menu-hamb:hover {
-  background-color: #ffd56b;
-  color: #1a1200;
-  border: 2px solid #ffcc33;
-  box-shadow: 0 4px 16px rgba(255, 213, 107, 0.8);
-}
-
-/* Submenú hamburguesa */
-.menu-hamb .submenu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  right: -1.5rem;
-  background-color: rgba(240, 195, 109, 0.25);
-  border: 1px solid #ffcc33;
-  box-shadow: 0 4px 12px rgba(255, 204, 51, 0.4);
-  border-radius: 8px;
-  padding: 8px 12px;
-  z-index: 999;
-  min-width: 180px;
-  text-align: left;
-  margin-top: 1px;
-}
-
-
-.menu-hamb:hover .submenu {
-  display: block;
-}
-
-.menu-hamb .submenu a {
-  display: block;
-  color: #3b2a00; /* igual, texto más oscuro */
-  font-family: 'Georgia', serif;
-  text-decoration: none;
-  font-size: 1rem;
-  padding: 6px 10px;
-  border-radius: 6px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  margin-bottom: 8px;
-}
-
-
-.menu-hamb .submenu a:hover {
-  background-color: #ffd56b;
-  color: #2c1f00;
-}
-
-
-/* Títulos de secciones */
-.recomendacion .slider {
-  max-width: 700px; /* Aumentado de 460px */
-  margin: 0 auto;
-}
-
-.recomendacion h2{
-  margin-top: 1rem;
-}
-
-.recomendacion h2,
-.top-canciones h2 {
-  text-align: center;
-  font-family: 'Georgia', serif;
-  font-size: 2.5rem;
-  color: #6b4c3b;
-  margin-bottom: 25px;
-  /*border-bottom: 3px solid #c19a6b;*/
-  padding-bottom: 10px;
-  background-color: #f8ddbda9;
-}
-
-/* Texto recomendación */
-.recomendacion .recom-sent {
-  color: #c26700;            /* marrón oscuro para contraste */
-}
-
-.recomendacion p {
-  font-family: 'Georgia', serif;
-  font-size: 0.9rem;
-  color: #4a4a4a;
-  text-align: justify;
-  margin-bottom: 18px;
-}
-
-/* Botón estilo Youtube */
-.botonyoutube {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background-color: #f1e6d0;
-  color: #6b4c3b;
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-weight: 600;
-  font-family: 'Georgia', serif;
-  text-decoration: none !important;
-  box-shadow: 0 4px 8px rgba(193,154,107,0.4);
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.botonyoutube:hover {
-  background-color: #c19a6b;
-  color: #f1e6d0;
-}
-
-.botonyoutube img.youtube-icon {
-  height: 25px;
-  width: 29px;
-  padding-right: 0.5rem;
-}
-
-.botones-slide {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 20px;
-  flex-wrap: wrap; /* Para que se acomoden en pantallas pequeñas */
-}
-
-
-/* Descripción de receta */
-.descripcion {
-  margin-top: 20px;
-  background-color: #f9f5f0;
-  padding: 4px 12px;
-  border-left: 5px solid #c19a6b;
-  border-radius: 12px;
-  color: #4a4a4a;
-  font-family: 'Georgia', serif;
-  font-size: 1rem;
-  line-height: 1.6;
-}
-
-.descripcion h3 {
-  color: #6b4c3b;
-  font-size: 1.2rem;
-  margin-bottom: 12px;
-  font-weight: 600;
-}
-
-/* Video embed */
-.video-embed {
-  margin-top: 35px;
-  text-align: center;
-}
-
-.video-embed iframe {
-  width: 100%;
-  max-width: 100%; /* Para que se adapte al nuevo tamaño */
-  height: 360px; /* Puedes subirlo a 400px si lo deseas */
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(193, 154, 107, 0.25);
-  border: none;
-}
-
-/* Sección Top recetas */
-.top-canciones {
-  margin-top: 60px;
-}
-
-.top-canciones h2 {
-  font-size: 2.2rem;
-  margin-bottom: 25px;
-  border-bottom: 3px solid #c19a6b;
-  padding-bottom: 10px;
-  text-align: center;
-}
-
-/* Artículo receta */
-.cancion {
-  display: flex;
-  background-color: beige;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.07);
-  margin-bottom: 25px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 160px;
-}
-
-.cancion:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-}
-
-.cancion img {
-  width: 200px;
-  object-fit: cover;
-  border-radius: 0 12px 12px 0;
-}
-
-.cancion .info {
-  padding: 20px 25px;
-  flex: 1;
-  font-family: 'Georgia', serif;
-  color: #4a4a4a;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-}
-
-.cancion h3 {
-  font-size: 1.6rem;
-  color: #6b4c3b;
-  margin-bottom: 10px;
-  font-weight: 600;
-}
-
-.cancion p {
-  font-size: 1rem;
-  color: #7a6c5a;
-  line-height: 1.4;
-  overflow: hidden;
-  height: 50px;
-}
-
-/* Contenedor botones mini */
-.cancion .acciones-mini {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-}
-
-/* Botón estilo YouTube pequeño */
-.cancion .botonyoutube {
-  background-color: #f1e6d0;
-  color: #6b4c3b;
-  padding: 8px 14px;
-  font-size: 0.9rem;
-  border-radius: 8px;
-  font-weight: 600;
-  font-family: 'Georgia', serif;
-  text-decoration: none;
-  box-shadow: 0 3px 8px rgba(193, 154, 107, 0.4);
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.cancion .botonyoutube:hover {
-  background-color: #c19a6b;
-  color: #f1e6d0;
-}
-
-/* Botón ver detalles, igual diseño para top y recomendaciones */
-
-.boton-detalles,
-.boton-detalles-top {
-  background-color: #c19a6b;
-  color: #fff;
-  padding: 10px 18px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-family: 'Georgia', serif;
-  text-decoration: none;
-  box-shadow: 0 4px 12px rgba(193, 154, 107, 0.5);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.boton-detalles:hover,
-.boton-detalles-top:hover {
-  background-color: #6b4c3b;
-  color: #f1e6d0;
-}
-
-/* Botón "Ver lista completa" más elegante */
-.lista-completa {
-  max-width: 1200px;
-  margin: 4rem auto;
-  background-color: #1e1e1e;
-  color: #f1e6d0;
-  border-radius: 16px;
-  padding: 30px 40px;
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5);
-}
-.fila-cancion {
-  display: grid;
-  grid-template-columns: 40px 60px 1fr auto;
-  align-items: center;
-  gap: 15px;
-  background-color: #2b2b2b;
-  padding: 12px 20px;
-  border-bottom: 1px solid #444;
-  border-radius: 12px;
-  transition: background-color 0.3s ease;
-}
-
-.fila-cancion:hover {
-  background-color: #383838;
-}
-
-.fila-cancion .miniatura img {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 2px solid #c19a6b;
-}
-
-.fila-cancion .datos {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-family: 'Georgia', serif;
-}
-
-.fila-cancion .datos strong {
-  color: #ffd56b;
-  font-size: 1.1rem;
-}
-
-.fila-cancion .datos span {
-  color: #d8c4aa;
-  font-size: 0.95rem;
-}
-
-.fila-cancion .boton-detalles {
-  background-color: #c19a6b;
-  color: #fff;
-  padding: 8px 14px;
-  border-radius: 10px;
-  font-weight: 600;
-  font-family: 'Georgia', serif;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 4px 12px rgba(193, 154, 107, 0.5);
-}
-
-.fila-cancion .boton-detalles:hover {
-  background-color: #6b4c3b;
-  color: #f1e6d0;
-}
-.lista-completa h2 {
-  text-align: center;
-  font-family: 'Georgia', serif;
-  font-size: 2.4rem;
-  margin-bottom: 2rem;
-  color: #ffd56b;
-  border-bottom: 2px solid #c19a6b;
-  padding-bottom: 10px;
-}
-
-.btn-ver-lista {
-  display: block;
-  background: linear-gradient(135deg, #c19a6b, #6b4c3b);
-  color: #ffffff;
-  padding: 10px 20px;
-  border-radius: 20px;
-  font-weight: 700;
-  font-family: 'Georgia', serif;
-  font-size: 1.2rem;
-  box-shadow: 0 6px 15px rgba(107, 76, 59, 0.5);
-  text-decoration: none;
-  transition: background 0.4s ease;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-.btn-ver-lista-container {
-  display: flex;
-  justify-content: center;
-}
-
-.btn-ver-lista:hover {
-  background: linear-gradient(135deg, #6b4c3b, #c19a6b);
-  color: #faf8f5;
-}
-
-/* Paginación */
-.paginacion {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.paginacion .btn-pag {
-  display: inline-block;
-  margin: 0 6px;
-  padding: 8px 15px;
-  border-radius: 12px;
-  border: 2px solid #c19a6b;
-  color: #6b4c3b;
-  font-family: 'Georgia', serif;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.paginacion .btn-pag:hover {
-  background-color: #c19a6b;
-  color: #faf8f5;
-}
-
-.paginacion .activo {
-  background-color: #6b4c3b;
-  color: #faf8f5;
-  border-color: #6b4c3b;
-}
-
-/* Slider recomendaciones con scroll horizontal */
-.slider {
-  display: flex;
-  overflow: hidden; /* Oculta el scroll manual */
-  position: relative;
-  width: 100%;
-  justify-content: center;
-}
-
-.slide {
-  width: 100%;  /* Que use todo el espacio disponible del .slider */
-  max-width: 700px; /* Igual al slider */
-  margin: 0 auto;
-  display: none;
-  flex-shrink: 0;
-  transition: transform 0.5s ease;
-}
-
-
-.slide.active {
-  display: block;
-}
-
-
-/* Flechas para slider */
-.nav-flechas {
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 30px;
-}
-
-.nav-flechas button {
-  background-color: #c19a6b;
-  color: #faf8f5;
-  border: none;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  font-size: 1.6rem;
-  margin: 0 12px;
-  cursor: pointer;
-  box-shadow: 0 6px 14px rgba(107, 76, 59, 0.5);
-  transition: background-color 0.3s ease;
-}
-
-.nav-flechas button:hover {
-  background-color: #6b4c3b;
-}
-
-.contacto{
-  text-align: center;
-    border-top: 3px solid #c19a6b;
-}
-.contacto h2{
-  text-align: center;
-  font-family: 'Georgia', serif;
-  font-size: 1.8rem;
-  color: #6b4c3b;
-  margin-bottom: 25px;
-  margin-top: 1rem
-}
-.contacto p {
-  font-size: 1.2rem;
-  color: #7c3200;
-  font-family: 'Georgia', serif;
-  text-align: center;
-  margin: 0.8rem 0;
-}
-
-.contacto p a {
-  display: inline-block;
-  margin-left: 10px; /* Espacio entre texto y botón */
-  padding: 10px 20px;
-  background-color: #ffd90096; /* Dorado claro */
-  color: #3f2c00; /* Café oscuro para contraste */
-  font-weight: bold;
-  font-family: 'Georgia', serif;
-  font-size: 1rem;
-  text-decoration: none;
-  border-radius: 8px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  border: none;
-  vertical-align: middle;
-}
-
-.contacto p a:hover {
-  background-color: #ffcc00;
-  transform: scale(1.04);
-  color: #2c1e00;
-  text-decoration: underline;
-}
-
-/* ---------------- Detalles estilo moderno (de detalle.php) ---------------- */
-
-.acciones-detalle {
-  margin-left: auto;
-  display: flex;
-  gap: 1rem;
-}
-.acciones-detalle a,
-.acciones-detalle button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  padding: 8px 16px;
-  background: #ff5c5c;
-  color: #fff;
-  border-radius: 6px;
-  font-weight: 600;
-  text-decoration: none;
-  box-shadow: 0 0 6px #ff4a4a;
-  transition: background-color 0.3s ease;
-  border: none;
-  cursor: pointer;
-  font-family: 'Georgia', serif;
-}
-.acciones-detalle a:hover,
-.acciones-detalle button:hover {
-  background: #ff2a2a;
-}
-
-    .volver-fijo {
-      position: fixed;
-      top: 15px;
-      left: 16rem;
-      background: #ffeb3b;
-      color: #222;
-      padding: 6px 14px;
-      border-radius: 6px;
-      font-weight: 700;
-      text-decoration: none;
-      box-shadow: 0 0 8px #ffeb3baa;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-.volver-fijo i {
-  font-size: 1.2rem;
-}
-
-.titulo-lista {
-  text-align: center;
-  font-size: 2.4rem;
-  color: #ffd56b;
-  margin: 2rem 0;
-  text-shadow: 0 0 6px #c19a6b;
-  font-family: 'Georgia', serif;
-}
-
-/* Estado visual para edición/eliminación */
-body.modo-editar .fila-cancion,
-body.modo-eliminar .fila-cancion {
-  cursor: pointer;
-}
-
-/* Footer elegante */
-   /* footer {
-      margin-top: auto;
-      padding: 1.2rem 0;
-      background: linear-gradient(to right, #ff4a4a, #ffa353);
-      color: #fff;
-      font-family: 'Georgia', serif;
-      text-align: center;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      font-size: 0.9rem;
-      user-select: none;
-      box-shadow: 0 6px 20px #ff4a4a88;
-    }*/
-        footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      font-size: 0.9rem;
-      background: rgba(0,0,0,0.6);
-      color: #ccc;
-    }
-
-footer p {
-  margin-bottom: 3px;
-  font-weight: 400;
-  font-size: 0.9rem;
-}
-
-/* Responsive ajustes */
-
-/* Para pantallas grandes (> 1200px) */
-@media (max-width: 1200px) {
-  
-  .header {
-    height:auto;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    padding: 0.5rem 1rem;
-    position:fixed;
-  }
-  .container {
-   max-width: 100%;       /* Que ocupe el 100% del ancho */
-    width: 100%;           /* Forzar que el ancho sea total */
-    margin: 6rem auto 2rem; /* Dejar margen arriba y abajo */
-    padding: 20px 15px;    /* Un poco de espacio a los lados para que no quede pegado */
-    box-sizing: border-box; /* Para que padding no haga overflow */
-  }
-
-  .header img.logo {
-    width: 80px !important; /* Igual que en móvil pequeño */
-    margin-top: 0px !important; /* Eliminar margen */
-    transition: width 0.3s ease;
-  }
-
-    .volver-fijo {
-    top: 0px !important;
-    font-size: 0.95rem !important;
-    padding: 5px 10px !important;
-    position: static !important;
-    display: inline-block;
-    margin-right:auto;
-  }
-  .volver-fijo i {
-  font-size: 0.85rem;
-}
-
-}
-
-/* MEDIA QUERY: Tablets y móviles grandes (≤768px) */
-@media (max-width: 768px) {
-  .header {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: nowrap;
-    height:auto;
-
-    padding: 0.5rem 1rem;
-    position:fixed;
+<?php
+include 'conexion.php';
+
+// Configuración de paginación
+$recetas_por_pagina = 5;
+$pagina_actual = isset($_GET['pagina']) && is_numeric($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+$offset = ($pagina_actual - 1) * $recetas_por_pagina;
+
+// Total de recetas tipo 'top'
+$stmtCount = $pdo->query("SELECT COUNT(*) FROM recetas WHERE tipo = 'top'");
+$total_recetas = $stmtCount->fetchColumn();
+$total_paginas = ceil($total_recetas / $recetas_por_pagina);
+
+// Recomendaciones
+$stmRec = $pdo->query("SELECT * FROM recetas WHERE tipo = 'recomendacion' ORDER BY orden_mes ASC");
+$recs = $stmRec->fetchAll(PDO::FETCH_ASSOC);
+
+// Top recetas paginadas
+$stmtPag = $pdo->prepare("SELECT * FROM recetas WHERE tipo = 'top' ORDER BY autor, titulo LIMIT :limit OFFSET :offset");
+$stmtPag->bindValue(':limit', $recetas_por_pagina, PDO::PARAM_INT);
+$stmtPag->bindValue(':offset', $offset, PDO::PARAM_INT);
+$stmtPag->execute();
+$recetas = $stmtPag->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <title>CocinaPower</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="icon" href="icon.png"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+<div class="fondo"></div>
+
+<!-- HEADER FUERA DEL CONTAINER -->
+<div class="header">
+  <div class="header-left">
+    <a href="."><img src="logo1.png" class="logo" alt="Logo CocinaPower"/></a>
     
+  </div>
+
+  <div class="header-right">
+    <nav class="menu">
+      <a href="#recomendaciones">Inicio</a>
+
+      <div class="menu-item">
+        <a href="#top-canciones" class="top-link">Top Recetas</a>
+        <div class="submenu-top">
+           <div class="hover-bridge"></div>
+          <a href="listacompleta.php">Lista completa</a>
+        </div>
+      </div>
+
+      <a href="#contacto">Contacto</a>
+      <span class="separador">|</span>
+
+      <div class="menu-hamb">
+        ☰
+        <div class="submenu">
+          <a href="agregarrecomendacion.php?tipo=recomendacion">Agregar<br>Recomendación</a>
+          <a href="agregartop.php?tipo=top">Agregar<br>Receta</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<!-- CONTENIDO PRINCIPAL -->
+<div class="container">
+  <main>
+
+    <!-- Recomendaciones -->
+    <section id="recomendaciones" class="recomendacion">
+      <h2>Recetas recomendadas del mes</h2>
+      <div class="slider">
+        <?php foreach($recs as $i => $c): ?>
+          <div class="slide <?= $i===0?'active':'' ?>" onclick="window.location='detalle.php?id=<?= $c['id'] ?>'">
+            <p class="recom-sent">
+              <?= !empty($c['recomendacion_text']) ? htmlspecialchars($c['recomendacion_text']) :
+                'Te recomiendo la receta "'.htmlspecialchars($c['titulo']).'"'; ?>
+            </p>
+
+            <div class="descripcion">
+              <h3><?=htmlspecialchars($c['titulo'])?></h3>
+              <p><?=htmlspecialchars($c['descripcion'])?></p>
+            </div>
+
+            <div class="video-embed">
+              <?php preg_match('/v=([^&]+)/',$c['enlace_youtube'],$m); $vid = $m[1] ?? ''; ?>
+              <iframe src="https://www.youtube.com/embed/<?= $vid ?>" frameborder="0" allowfullscreen></iframe>
+            </div>
+
+           <div class="botones-slide" onclick="event.stopPropagation();">
+  <a class="botonyoutube" href="<?= htmlspecialchars($c['enlace_youtube'])?>" target="_blank">
+    <img src="youtube.png" class="youtube-icon"> Ver en YouTube
+  </a>
+  <a class="boton-detalles" href="detalle.php?id=<?= $c['id'] ?>">
+    <i class="fas fa-search"></i> <span>Ver detalles</span>
+  </a>
+</div>
+
+          </div>
+        <?php endforeach; ?>
+      </div>
+
+      <div class="nav-flechas">
+        <button id="prev">←</button>
+        <button id="next">→</button>
+      </div>
+    </section>
+
+    <!-- Top Recetas -->
+    <section id="top-canciones" class="top-canciones">
+      <h2 data-text="Top recetas del mes">Top recetas</h2>
+      <div class="lista-canciones">
+        <?php foreach($recetas as $c): ?>
+          <article class="cancion" onclick="window.location='detalle.php?id=<?= $c['id'] ?>'">
+            <img src="<?=htmlspecialchars($c['imagen_url'])?>" alt="Miniatura de receta"/>
+            <div class="info">
+              <h3><?=htmlspecialchars($c['titulo'])?></h3>
+              <p><?=htmlspecialchars($c['descripcion'])?></p>
+              <div class="acciones-mini">
+                <a class="botonyoutube" href="<?=htmlspecialchars($c['enlace_youtube'])?>" target="_blank" onclick="event.stopPropagation();">
+                  <img src="youtube.png" class="youtube-icon"> Ver en YouTube
+                </a>
+                <a class="boton-detalles boton-detalles-top" href="detalle.php?id=<?= $c['id'] ?>" onclick="event.stopPropagation();">
+                  <i class="fas fa-search"></i> <span>Ver detalles</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        <?php endforeach; ?>
+
+        <!-- Paginación -->
+        <div class="paginacion">
+          <?php if ($pagina_actual > 1): ?>
+            <a href="?pagina=<?= $pagina_actual - 1 ?>#top-canciones" class="btn-pag">« Anterior</a>
+          <?php endif; ?>
+
+          <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
+            <?php if ($i == $pagina_actual): ?>
+              <span class="btn-pag activo"><?= $i ?></span>
+            <?php else: ?>
+              <a href="?pagina=<?= $i ?>#top-canciones" class="btn-pag"><?= $i ?></a>
+            <?php endif; ?>
+          <?php endfor; ?>
+
+          <?php if ($pagina_actual < $total_paginas): ?>
+            <a href="?pagina=<?= $pagina_actual + 1 ?>#top-canciones" class="btn-pag">Siguiente »</a>
+          <?php endif; ?>
+        </div>
+
+        <div class="btn-ver-lista-container">
+          <a href="listacompleta.php" class="btn-ver-lista">Ver lista completa de recetas</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="separator"></div>
+
+<section id="contacto" class="contacto">
+  <h2>Contacto</h2>
+  <p>
+    ¿Quieres recomendar alguna receta?
+    <a href="agregarrecomendacion.php?tipo=recomendacion">Llena este formulario</a>
+  </p>
+</section>
+
+  </main>
+</div>
+
+<!-- FOOTER FUERA DEL CONTAINER -->
+<footer>
+  <p>Curso: Conceptualización de servicios en la nube</p>
+  <p>Nombre: Vanessa Itzarahí Gómez Ramírez</p>
+  <p>&copy; <?= date('Y') ?> Todos los derechos reservados</p>
+</footer>
+
+<script>
+  let idx = 0;
+  const slides = document.querySelectorAll('.slider .slide');
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+
+  function mostrarSlide(index) {
+    slides.forEach(s => s.classList.remove('active'));
+    slides[index].classList.add('active');
   }
 
-  .volver-fijo {
-    left: 6rem !important;
-    top: 0px !important;
-    font-size: 0.85rem !important;
-    padding: 5px 10px !important;
-    position: static !important;
-    display: inline-block;
-    margin: 1rem auto;
-  }
-  .volver-fijo i {
-  font-size: 0.85rem;
-}
-  .container {
-    max-width: 100%;       /* Que ocupe el 100% del ancho */
-    width: 100%;           /* Forzar que el ancho sea total */
-    margin: 5.5rem auto 2rem; /* Dejar margen arriba y abajo */
-    padding: 20px 15px;    /* Un poco de espacio a los lados para que no quede pegado */
-    box-sizing: border-box; /* Para que padding no haga overflow */
+  prev.onclick = () => {
+    idx = (idx - 1 + slides.length) % slides.length;
+    mostrarSlide(idx);
+    reiniciarAutoplay();
+  };
+
+  next.onclick = () => {
+    idx = (idx + 1) % slides.length;
+    mostrarSlide(idx);
+    reiniciarAutoplay();
+  };
+
+  function autoplay() {
+    idx = (idx + 1) % slides.length;
+    mostrarSlide(idx);
   }
 
-  .header img.logo {
-    width: 70px !important; /* Igual que en móvil pequeño */
-    margin-top: 0 !important; /* Eliminar margen */
-    transition: width 0.3s ease;
+  let interval = setInterval(autoplay, 6000); // cada 6 segundos
+
+  function reiniciarAutoplay() {
+    clearInterval(interval);
+    interval = setInterval(autoplay, 6000);
   }
 
-  .header-right {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    flex-grow: 1;
-  }
-
-  .menu-hamb {
-    font-size: 1.3rem;
-    padding: 6px 10px;
-    margin-left: auto;
-    background-color: #ffbb33;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(255, 187, 51, 0.6);
-    cursor: pointer;
-    z-index: 1000;
-    display: block !important;
-  }
-
-  .submenu-top {
-    left: auto;
-    right: 0;
-  }
-
-  .menu {
-    display: flex !important;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 10px;
-    background: transparent;
-    padding: 0;
-    position: static;
-  }
-
-  .menu.show {
-    display: flex;
-  }
-
-  .menu a {
-    font-size: 0.9rem;
-    padding: 6px 12px;
-  }
-
-  .cancion {
-    flex-direction: column;
-    height: auto;
-  }
-
-  .cancion img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 12px 12px 0 0;
-  }
-
-  .cancion .info {
-    padding: 16px;
-  }
-
-  .slider, .slide {
-    max-width: 100%;
-    padding: 0 10px;
-  }
-
-  .video-embed iframe {
-    height: 220px;
-  }
-
-  .lista-completa {
-    padding: 20px;
-    width: 95%;
-  }
-
-  footer {
-    font-size: 0.8rem;
-    padding: 1rem 0.5rem;
-  }
-  .recomendacion h2, .top-canciones h2 {
-  text-align: center;
-  font-size: 1.8rem;
-}
-
-.descripcion h3 {
-    font-size: 1.1rem;
-}
-.cancion h3 {
-    font-size: 1.4rem;
-}
-.cancion p {
-    font-size: 0.9rem;
-}
-.menu-item .submenu-top a {
-  font-size: 0.65rem;
-  margin-left: 0;
-}
-
-.menu-hamb .submenu a {
-  font-size: 0.8rem;
-}
-}
-
-/* MEDIA QUERY: Móviles pequeños (≤480px) */
-@media (max-width: 480px) {
-  .header {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: nowrap;
-    padding: 0.4rem 0.8rem;
-    height: auto;
-  }
-
-  .header img.logo {
-    width: 65px !important;
-    margin: 0 !important;
-    transition: width 0.3s ease;
-  }
-
-  .header-right {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    flex-grow: 1;
-  }
-
-  .menu-hamb {
-    display: block;
-    font-size: 1.1rem;
-    padding: 4px 8px;
-    background-color: #ffbb33;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(255, 187, 51, 0.6);
-    z-index: 1000;
-  }
-
-  .menu {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.95);
-    position: absolute;
-    top: 60px;
-    right: 0;
-    border-radius: 0 0 10px 10px;
-    padding: 0.5rem 1rem;
-    z-index: 999;
-  }
-
-  .menu.show {
-    display: flex;
-  }
-
-  .menu a {
-    font-size: 0.8rem;
-    padding: 6px 10px;
-    background-color: #ffbb33;
-    border-radius: 6px;
-  }
-
-  .video-embed iframe {
-    height: 180px;
-  }
-
-  .cancion img {
-    height: 140px;
-  }
-
-  .lista-completa {
-    padding: 16px;
-  }
+  mostrarSlide(idx);
 
 
-    body {
-    display: block !important; /* quita el layout en flex que empuja el footer */
-  }
+  document.addEventListener("DOMContentLoaded", () => {
+    const hamb = document.querySelector(".menu-hamb");
+    hamb.addEventListener("click", () => {
+      const menu = document.querySelector(".menu");
+      menu.classList.toggle("show");
+    });
+  });
 
-  .container {
-    margin: 1rem auto 0 auto !important; /* margen arriba normal, cero abajo */
-    padding-bottom: 0 !important;
-  }
+</script>
 
-  footer {
-    margin-top: 0 !important; /* que quede pegado al contenido */
-    padding-top: 1.2rem;
-  }
-
-}
-
-@media (max-width: 600px) {
-  .acciones-detalle a,
-  .acciones-detalle button {
-    padding: 4px 8px !important;
-    font-size: 0.7rem !important;
-  }
-
-  .volver-fijo {
-    font-size: 0.7rem !important;
-    padding: 4px 8px !important;
-    left: 1rem !important;
-    top: 10px !important;
-    max-width: 45%; /* Evita que se desborde junto al logo */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .volver-fijo i {
-    font-size: 0.9rem !important;
-  }
-
-  .header {
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-  }
-
-  .header img.logo {
-    width: 60px !important;
-  }
-
-  .acciones-detalle {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-}
+</body>
+</html>
