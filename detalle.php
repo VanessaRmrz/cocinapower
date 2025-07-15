@@ -31,20 +31,6 @@ if (!$r) exit('Receta no encontrada');
       flex-direction: column;
     }
 
-    .header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      height: 60px;
-      background: rgba(0,0,0,0.8);
-      display: flex;
-      align-items: center;
-      padding: 0 2rem;
-      box-sizing: border-box;
-      z-index: 1000;
-      gap: 1rem;
-    }
-
     .acciones-detalle {
       margin-left: auto;
       display: flex;
@@ -184,11 +170,15 @@ if (!$r) exit('Receta no encontrada');
     }
 
     /* Responsive */
-    @media (max-width: 900px) {
+    @media (max-width: 1200px) {
+      
+    .header {
+      height: auto;
+    }
       .container {
         flex-direction: column;
         max-width: 95vw;
-        margin: 110px auto 2rem;
+        margin: 100px auto 2rem;
         padding: 1.5rem 2rem;
       }
       .detalle-info, .detalle-video {
