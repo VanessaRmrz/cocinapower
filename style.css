@@ -740,25 +740,19 @@ footer p {
 
 /* Responsive ajustes */
 
-/* Para pantallas medianas y grandes (mayores a 768px y hasta 1200px) */
-@media (min-width: 769px) and (max-width: 1200px) {
-  .container {
-    max-width: 90%;  /* que ocupe más del ancho disponible */
-    margin: 5rem auto;
-    padding: 30px 20px; /* un poco menos padding horizontal */
-  }
-
-  .header img.logo {
-    width: 140px; /* reduce un poco el logo para que no se vea gigante */
-    margin-top: 0; /* elimina margen excesivo */
-    transition: width 0.3s ease;
-  }
-}
-
 /* Para pantallas grandes (> 1200px) */
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
+  .header {
+    height:13%;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding: 0.5rem 1rem;
+    position:fixed;
+  }
   .container {
-    max-width: 100%;       /* Que ocupe el 100% del ancho */
+   max-width: 100%;       /* Que ocupe el 100% del ancho */
     width: 100%;           /* Forzar que el ancho sea total */
     margin: 5rem auto 2rem; /* Dejar margen arriba y abajo */
     padding: 20px 15px;    /* Un poco de espacio a los lados para que no quede pegado */
@@ -766,8 +760,8 @@ footer p {
   }
 
   .header img.logo {
-    width: 70px !important; /* Igual que en móvil pequeño */
-    margin-top: 0 !important; /* Eliminar margen */
+    width: 80px !important; /* Igual que en móvil pequeño */
+    margin-top: 0px !important; /* Eliminar margen */
     transition: width 0.3s ease;
   }
 
@@ -780,9 +774,11 @@ footer p {
     justify-content: space-between;
     align-items: center;
     flex-wrap: nowrap;
-    height: auto;
+    height:13%;
+
     padding: 0.5rem 1rem;
-    position: relative;
+    position:fixed;
+    
   }
 
   .volver-fijo {
