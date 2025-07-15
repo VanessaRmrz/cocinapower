@@ -50,26 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="icon" href="icon.png"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Georgia', serif;
-      background: url('fondo.jpeg') no-repeat center center fixed;
-      background-size: cover;
-      color: #eee;
-      min-height: 100vh;
-    }
 
-    .header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(0,0,0,0.85);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 2rem;
-      z-index: 1000;
-    }
 
     .volver-fijo {
       position: fixed;
@@ -153,9 +134,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       color: #ccc;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1200px) {
       .agregar-recomendacion-container {
-        margin: 110px auto 2rem;
+        margin: 130px auto 2rem;
         padding: 1.5rem;
       }
       .volver-fijo {
