@@ -35,24 +35,6 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
     min-height: 100vh;
   }
 
-  header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    padding: 1rem 2rem;
-    gap: 1rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
-  }
-
-  header img.logo {
-    height: 60px;
-  }
-
   .volver-fijo {
     background: #ffd700;
     color: #000;
@@ -90,7 +72,7 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
   .container {
     width: 100%;
     max-width: 1600px;
-    margin: 2rem auto;
+    margin: 6rem auto;
     background: rgba(10, 10, 20, 0.85);
     border-radius: 14px;
     box-shadow: 0 0 40px #ff4a4aaa;
@@ -255,9 +237,11 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 </head>
 <body>
-<header>
+<header class="header">
   <a href="index.php"><img src="logo.png" class="logo" alt="Logo CocinaPower" /></a>
-  <a href="index.php" class="volver-fijo"><i class="fas fa-arrow-left"></i> Volver</a>
+  <?php $volver = isset($_GET['volver']) ? $_GET['volver'] : 'index.php'; ?>
+  <a href="<?= htmlspecialchars($volver) ?>" class="volver-fijo"><i class="fas fa-arrow-left"></i> Volver</a>
+
   <div class="acciones-detalle">
     <button id="btn-editar"><i class="fas fa-edit"></i> Editar</button>
     <button id="btn-agregar"><i class="fas fa-plus"></i> Agregar</button>
@@ -267,6 +251,7 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <button class="confirmar eliminar" id="confirmar-eliminar" style="display:none;">Eliminar recetas seleccionadas</button>
   </div>
 </header>
+
 
 
  
