@@ -1,42 +1,46 @@
 <?php
 include 'conexion.php';
 
-function extraerIdYoutube($url) {
-    if (preg_match('/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $url, $match)) {
-        return $match[1];
-    }
-    return '';
-}
+if (!isset($_GET['id'])) exit('ID no especificado.');
+$id = intval($_GET['id']);
+
+$stmt = $pdo->prepare("SELECT * FROM recetas WHERE id = ? AND tipo = 'top'");
+$stmt->execute([$id]);
+$c = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$c) exit('Receta no encontrada o no es del tipo "top".');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titulo = $_POST['titulo'];
-    $autor = $_POST['autor'] ?? '';
+    $autor = $_POST['autor'];
     $descripcion = $_POST['descripcion'];
     $enlace = $_POST['enlace_youtube'];
 
-    $video_id = extraerIdYoutube($enlace);
+    parse_str(parse_url($enlace, PHP_URL_QUERY), $url_params);
+    $video_id = $url_params['v'] ?? '';
+    if (!$video_id && preg_match('/youtu\.be\/([a-zA-Z0-9_-]+)/', $enlace, $match)) {
+        $video_id = $match[1];
+    }
+
     $imagen = $video_id ? "https://img.youtube.com/vi/$video_id/hqdefault.jpg" : '';
 
-    $stmtOrden = $pdo->query("SELECT MAX(orden_mes) AS max_orden FROM recetas WHERE tipo = 'top'");
-    $max = $stmtOrden->fetch(PDO::FETCH_ASSOC)['max_orden'] ?? 0;
-    $orden = $max + 1;
-
-    $fecha = date('Y-m-d');
-
-    $stmt = $pdo->prepare("INSERT INTO recetas 
-        (titulo, autor, descripcion, enlace_youtube, imagen_url, tipo, fecha_recomendacion, orden_mes)
-        VALUES (?, ?, ?, ?, ?, 'top', ?, ?)");
+    $stmt = $pdo->prepare("UPDATE recetas SET 
+        titulo = ?, 
+        autor = ?, 
+        descripcion = ?, 
+        enlace_youtube = ?, 
+        imagen_url = ? 
+        WHERE id = ? AND tipo = 'top'");
     $stmt->execute([
         $titulo,
         $autor,
         $descripcion,
         $enlace,
         $imagen,
-        $fecha,
-        $orden
+        $id
     ]);
 
-    header('Location: index.php');
+    header("Location: detalle.php?id=$id");
     exit;
 }
 ?>
@@ -45,14 +49,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Agregar Receta al Top</title>
+  <title>Editar Receta del Top</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="icon.png"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: url('fondo.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      color: #eee;
+      min-height: 100vh;
+    }
 
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 2rem;
+      z-index: 1000;
+    }
 
     .volver-fijo {
       position: fixed;
@@ -103,6 +124,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       padding: 12px;
       font-family: 'Georgia', serif;
       font-size: 1rem;
+      width: 100%;
+      box-sizing: border-box;
       resize: vertical;
     }
 
@@ -122,10 +145,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       cursor: pointer;
       transition: background 0.3s ease;
       box-shadow: 0 0 10px #ff4a4aaa;
+      margin: 0 auto;
     }
 
     .agregar-recomendacion-container button:hover {
       background: #cc0000;
+    }
+
+    .label-text {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #ffd700;
+    }
+
+    .campo-pequeño {
+      width: 50%;
+      max-width: 500px;
     }
 
     footer {
@@ -136,15 +172,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       color: #ccc;
     }
 
-    @media (max-width: 1200px) {
-      .agregar-recomendacion-container {
-        margin: 130px auto 2rem;
-        padding: 1.5rem;
-      }
-      .volver-fijo {
-        left: 1rem;
-        font-size: 0.9rem;
-      }
+    @media (max-width: 768px) {
+.agregar-recomendacion-container {
+    margin: 110px auto 2rem;
+    padding: 1.5rem;
+    max-width: 100%; /* NUEVO */
+    width: 100%;      /* NUEVO */
+    border-radius: 0; /* Opcional: para que no haya esquinas redondeadas en móvil */
+  }
+
+  .volver-fijo {
+    left: 1rem;
+    font-size: 0.9rem;
+  }
     }
   </style>
 </head>
@@ -152,24 +192,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <div class="header detalle-header">
     <a href="index.php"><img src="logo.png" class="logo" alt="Logo CocinaPower"/></a>
-  <a href="index.php" class="volver-fijo"><i class="fas fa-arrow-left"></i> Volver</a>
-
+    <a href="detalle.php?id=<?= $id ?>" class="volver-fijo"><i class="fas fa-arrow-left"></i> Volver</a>
   </div>
-
-
-
 
   <div class="agregar-recomendacion-container">
-    <h2>Agregar Receta al Top</h2>
+    <h2>Editar Receta del Top</h2>
     <form method="post">
-      <input name="titulo" placeholder="Nombre de la receta" required>
-      <input name="autor" placeholder="Autor de la receta (opcional)">
-      <textarea name="descripcion" placeholder="Descripción o preparación" required></textarea>
-      <input name="enlace_youtube" placeholder="URL del video en YouTube (https://...)" required>
-      <button type="submit"><i class="fas fa-save"></i> Guardar Receta</button>
+      <label>
+        <span class="label-text">Título:</span>
+        <input name="titulo" required value="<?= htmlspecialchars($c['titulo']) ?>">
+      </label>
+
+      <label>
+        <span class="label-text">Autor:</span>
+        <input name="autor" value="<?= htmlspecialchars($c['autor']) ?>">
+      </label>
+
+      <label>
+        <span class="label-text">Descripción:</span>
+        <textarea name="descripcion" required><?= htmlspecialchars($c['descripcion']) ?></textarea>
+      </label>
+
+      <label>
+        <span class="label-text">URL de YouTube:</span>
+        <input name="enlace_youtube" required value="<?= htmlspecialchars($c['enlace_youtube']) ?>">
+      </label>
+
+      <button type="submit"><i class="fas fa-save"></i> Guardar Cambios</button>
     </form>
   </div>
-
 
   <footer>
     <p>Curso: Conceptualización de servicios en la nube</p>
