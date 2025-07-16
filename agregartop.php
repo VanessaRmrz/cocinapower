@@ -45,6 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Agregar Receta al Top</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="icon.png"/>
@@ -102,6 +104,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       font-family: 'Georgia', serif;
       font-size: 1rem;
       resize: vertical;
+        width: 100%;
+  box-sizing: border-box; /* para que padding no aumente ancho */
     }
 
     .agregar-recomendacion-container input::placeholder,
@@ -133,6 +137,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       background: rgba(0,0,0,0.6);
       color: #ccc;
     }
+    @media (max-width: 768px) {
+  .agregar-recomendacion-container {
+    margin: 2rem 1rem;  /* menos margen arriba y a los lados */
+    max-width: 100%;    /* ancho completo con algo de margen */
+    padding: 1.5rem;    /* menos padding para móvil */
+  }
+
+  .volver-fijo {
+    left: 1rem;
+    font-size: 0.9rem;
+  }
+
+
+}
+
 
     @media (max-width: 1200px) {
       .agregar-recomendacion-container {
