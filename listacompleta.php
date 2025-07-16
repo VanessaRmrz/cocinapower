@@ -38,12 +38,14 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
     header {
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
       background-color: rgba(0, 0, 0, 0.7);
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
+      gap: 1rem;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
     }
 
@@ -66,9 +68,6 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
       flex-wrap: wrap;
       gap: 1rem;
       justify-content: center;
-      padding: 1rem;
-      background: rgba(0, 0, 0, 0.6);
-      margin-top: 1rem;
     }
 
     .acciones-detalle button {
@@ -88,8 +87,8 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     .container {
-      width: 95%;
-      max-width: 1400px;
+      width: 98%;
+      max-width: 1600px;
       margin: 2rem auto;
       background: rgba(10, 10, 20, 0.85);
       border-radius: 14px;
@@ -122,6 +121,7 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
       gap: 1rem;
       cursor: pointer;
       transition: transform 0.2s ease;
+      width: 100%;
     }
 
     .fila-cancion:hover {
@@ -199,6 +199,8 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
       .acciones-detalle {
         flex-direction: column;
+        align-items: stretch;
+        width: 100%;
       }
 
       .fila-cancion {
@@ -218,17 +220,17 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
   <header>
     <a href="index.php"><img src="logo.png" class="logo" alt="Logo CocinaPower" /></a>
+    <div class="acciones-detalle">
+      <button id="btn-editar"><i class="fas fa-edit"></i> Editar</button>
+      <button id="btn-agregar"><i class="fas fa-plus"></i> Agregar</button>
+      <button id="btn-eliminar"><i class="fas fa-trash"></i> Eliminar</button>
+      <button id="btn-cancelar" style="display:none;">Cancelar</button>
+      <button class="confirmar" id="confirmar-editar" style="display:none;">Editar receta seleccionada</button>
+      <button class="confirmar eliminar" id="confirmar-eliminar" style="display:none;">Eliminar recetas seleccionadas</button>
+    </div>
     <a href="index.php" class="volver-fijo"><i class="fas fa-arrow-left"></i> Volver</a>
   </header>
 
-  <div class="acciones-detalle">
-    <button id="btn-editar"><i class="fas fa-edit"></i> Editar</button>
-    <button id="btn-agregar"><i class="fas fa-plus"></i> Agregar</button>
-    <button id="btn-eliminar"><i class="fas fa-trash"></i> Eliminar</button>
-    <button id="btn-cancelar" style="display:none;">Cancelar</button>
-    <button class="confirmar" id="confirmar-editar" style="display:none;">Editar receta seleccionada</button>
-    <button class="confirmar eliminar" id="confirmar-eliminar" style="display:none;">Eliminar recetas seleccionadas</button>
-  </div>
  
   <main class="container">
 
