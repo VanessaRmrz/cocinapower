@@ -20,223 +20,215 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
   <meta charset="UTF-8" />
   <title>Lista completa de recetas - CocinaPower</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="icon" href="icon.png" />
- <style>
-  body {
-    margin: 0;
-    font-family: 'Georgia', serif;
-    background: url('fondo.jpeg') no-repeat center center fixed;
-    background-size: cover;
-    color: #eee;
-    min-height: 100vh;
-  }
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: url('fondo.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      color: #eee;
+      min-height: 100vh;
+    }
 
-  .volver-fijo {
-    position: fixed;
-    top: 15px;
-    left: 15rem;
-    background: #ffd700;
-    color: #000;
-    padding: 6px 14px;
-    border-radius: 6px;
-    font-weight: bold;
-    text-decoration: none;
-    box-shadow: 0 0 8px #ffd700aa;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    }
 
-  .acciones-detalle {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.5);
-  }
-
-  .acciones-detalle button,
-  .acciones-detalle a {
-    background: #ff5c5c;
-    color: white;
-    padding: 8px 14px;
-    border-radius: 6px;
-    border: none;
-    font-weight: bold;
-    text-decoration: none;
-    box-shadow: 0 0 6px #ff4a4a;
-    cursor: pointer;
-  }
-
-  .acciones-detalle .confirmar {
-    background: #ffd700;
-    color: #000;
-  }
-
-  .container {
-    margin: 100px auto 0rem;
-    max-width: 1100px;
-    background: rgba(10, 10, 20, 0.85);
-    border-radius: 14px;
-    box-shadow: 0 0 40px #ff4a4aaa;
-    color: #fff;
-    padding: 2rem;
-  }
-
-  .titulo-lista {
-    margin-bottom: 2rem;
-    text-align: center;
-    color: #ffd363;
-    font-size: 2rem;
-    text-shadow: 0 0 6px #ffd363aa;
-  }
-
-  .lista-completa {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-  }
-
-  .fila-cancion {
-    display: flex;
-    align-items: center;
-    background: rgba(20, 20, 30, 0.9);
-    padding: 1rem;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(255, 249, 214, 0.53);
-    gap: 1rem;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    flex-wrap: wrap;
-  }
-
-  .fila-cancion:hover {
-    transform: scale(1.015);
-  }
-
-  .numero {
-    width: 30px;
-    text-align: center;
-    font-weight: bold;
-    color: #ffd700;
-  }
-
-  .miniatura img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 8px;
-    border: 2px solid #ff4a4a;
-  }
-
-  .datos {
-    flex: 1;
-    min-width: 200px;
-  }
-
-  .titulo-artista {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #ff4a4a;
-    text-shadow: 0 0 5px #ff4a4aaa;
-  }
-
-  .tipo-receta {
-    font-size: 0.9rem;
-    color: #eee;
-  }
-
-  .acciones-mini {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .acciones-mini a {
-    background: rgb(228, 146, 46);
-    color: white;
-    padding: 6px 12px;
-    font-size: 0.9rem;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    text-align: center;
-    box-shadow: 0 0 6px #ff0000aa;
-  }
-
-  .acciones-mini a:hover {
-    background: #cc0000;
-  }
-
-  footer {
-    text-align: center;
-    padding: 2rem 1rem;
-    font-size: 0.9rem;
-    background: rgba(0,0,0,0.6);
-    color: #ccc;
-  }
-
-  /* 📱 RESPONSIVE */
-  @media (max-width: 768px) {
-    .container {
-      margin: 2rem 1rem;
-      max-width: 100%;
-      padding: 1.5rem;
+    header img.logo {
+      height: 60px;
     }
 
     .volver-fijo {
-      left: 1rem;
-      font-size: 0.9rem;
-      padding: 5px 10px;
-    }
-
-    .fila-cancion {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .acciones-mini {
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      width: 100%;
-      justify-content: space-between;
-    }
-
-    .titulo-artista {
-      font-size: 1rem;
+      background: #ffd700;
+      color: #000;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 0 8px #ffd700aa;
     }
 
     .acciones-detalle {
-      flex-direction: column;
-      gap: 0.5rem;
-      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.6);
+      margin-top: 1rem;
     }
-  }
-</style>
 
+    .acciones-detalle button {
+      background: #ff5c5c;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 6px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 6px #ff4a4a;
+    }
+
+    .acciones-detalle .confirmar {
+      background: #ffd700;
+      color: #000;
+    }
+
+    .container {
+      width: 95%;
+      max-width: 1400px;
+      margin: 2rem auto;
+      background: rgba(10, 10, 20, 0.85);
+      border-radius: 14px;
+      box-shadow: 0 0 40px #ff4a4aaa;
+      padding: 2rem;
+    }
+
+    .titulo-lista {
+      text-align: center;
+      color: #ffd363;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 6px #ffd363aa;
+    }
+
+    .lista-completa {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .fila-cancion {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      background: rgba(20, 20, 30, 0.9);
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 249, 214, 0.53);
+      gap: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .fila-cancion:hover {
+      transform: scale(1.015);
+    }
+
+    .numero {
+      width: 30px;
+      text-align: center;
+      font-weight: bold;
+      color: #ffd700;
+    }
+
+    .miniatura img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid #ff4a4a;
+    }
+
+    .datos {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .titulo-artista {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #ff4a4a;
+      text-shadow: 0 0 5px #ff4a4aaa;
+    }
+
+    .tipo-receta {
+      font-size: 0.9rem;
+      color: #eee;
+    }
+
+    .acciones-mini {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .acciones-mini a {
+      background: rgb(228, 146, 46);
+      color: white;
+      padding: 6px 12px;
+      font-size: 0.9rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      text-align: center;
+      box-shadow: 0 0 6px #ff0000aa;
+    }
+
+    .acciones-mini a:hover {
+      background: #cc0000;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      background: rgba(0,0,0,0.6);
+      color: #ccc;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .acciones-detalle {
+        flex-direction: column;
+      }
+
+      .fila-cancion {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .acciones-mini {
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+  </style>
 </head>
 <body>
-
-  <div class="header">
+  <header>
     <a href="index.php"><img src="logo.png" class="logo" alt="Logo CocinaPower" /></a>
-  <a href="index.php" class="volver-fijo"><i class="fas fa-arrow-left"></i> Volver</a>
+    <a href="index.php" class="volver-fijo"><i class="fas fa-arrow-left"></i> Volver</a>
+  </header>
 
-    <div class="acciones-detalle">
-      <button id="btn-editar"><i class="fas fa-edit"></i> Editar</button>
-     <button id="btn-agregar"><i class="fas fa-plus"></i> Agregar</button>
-      <button id="btn-eliminar"><i class="fas fa-trash"></i> Eliminar</button>
-      <button id="btn-cancelar" style="display:none;">Cancelar</button>
-      <button class="confirmar" id="confirmar-editar" style="display:none;">Editar receta seleccionada</button>
-      <button class="confirmar eliminar" id="confirmar-eliminar" style="display:none;">Eliminar recetas seleccionadas</button>
-    </div>
+  <div class="acciones-detalle">
+    <button id="btn-editar"><i class="fas fa-edit"></i> Editar</button>
+    <button id="btn-agregar"><i class="fas fa-plus"></i> Agregar</button>
+    <button id="btn-eliminar"><i class="fas fa-trash"></i> Eliminar</button>
+    <button id="btn-cancelar" style="display:none;">Cancelar</button>
+    <button class="confirmar" id="confirmar-editar" style="display:none;">Editar receta seleccionada</button>
+    <button class="confirmar eliminar" id="confirmar-eliminar" style="display:none;">Eliminar recetas seleccionadas</button>
   </div>
-
  
   <main class="container">
 
