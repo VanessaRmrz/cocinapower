@@ -782,6 +782,27 @@ footer p {
 
 /* MEDIA QUERY: Tablets y móviles grandes (≤768px) */
 @media (max-width: 768px) {
+    .slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+
+  .slide {
+    min-width: 90%;
+    scroll-snap-align: center;
+    flex-shrink: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  }
+
+  .nav-flechas {
+    display:center;
+  }
   .header {
     flex-direction: row;
     justify-content: space-between;
@@ -879,10 +900,6 @@ footer p {
     padding: 16px;
   }
 
-  .slider, .slide {
-    max-width: 100%;
-    padding: 0 10px;
-  }
 
   .video-embed iframe {
     height: 220px;
