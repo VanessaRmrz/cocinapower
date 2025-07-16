@@ -1014,7 +1014,7 @@ footer p {
   }
 
   .container {
-    margin: 1rem auto 0 auto !important; /* margen arriba normal, cero abajo */
+    margin: 7rem auto 0 auto !important;; /* margen arriba normal, cero abajo */
     padding-bottom: 0 !important;
   }
 
@@ -1060,4 +1060,5 @@ footer p {
     flex-wrap: wrap;
     justify-content: center;
   }
+  
 }
