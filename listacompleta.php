@@ -79,14 +79,6 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
     padding: 2rem;
   }
 
-  .titulo-lista {
-    text-align: center;
-    color: #ffd363;
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    text-shadow: 0 0 6px #ffd363aa;
-  }
-
   .lista-completa {
     display: flex;
     flex-direction: column;
