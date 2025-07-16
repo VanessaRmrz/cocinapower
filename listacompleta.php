@@ -25,211 +25,249 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="icon" href="icon.png" />
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Georgia', serif;
-      background: url('fondo.jpeg') no-repeat center center fixed;
-      background-size: cover;
-      color: #eee;
-      min-height: 100vh;
-    }
+<style>
+  body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background: url('fondo.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    color: #eee;
+    min-height: 100vh;
+  }
 
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 1rem 2rem;
+    gap: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  }
+
+  header img.logo {
+    height: 60px;
+  }
+
+  .volver-fijo {
+    background: #ffd700;
+    color: #000;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 0 8px #ffd700aa;
+    white-space: nowrap;
+  }
+
+  .acciones-detalle {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .acciones-detalle button {
+    background: #ff5c5c;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 6px #ff4a4a;
+    white-space: nowrap;
+  }
+
+  .acciones-detalle .confirmar {
+    background: #ffd700;
+    color: #000;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 2rem auto;
+    background: rgba(10, 10, 20, 0.85);
+    border-radius: 14px;
+    box-shadow: 0 0 40px #ff4a4aaa;
+    padding: 2rem;
+  }
+
+  .titulo-lista {
+    text-align: center;
+    color: #ffd363;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 6px #ffd363aa;
+  }
+
+  .lista-completa {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .fila-cancion {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background: rgba(20, 20, 30, 0.9);
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 249, 214, 0.53);
+    gap: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    width: 100%;
+  }
+
+  .fila-cancion:hover {
+    transform: scale(1.015);
+  }
+
+  .numero {
+    width: 30px;
+    text-align: center;
+    font-weight: bold;
+    color: #ffd700;
+  }
+
+  .miniatura img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #ff4a4a;
+  }
+
+  .datos {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .titulo-artista {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #ff4a4a;
+    text-shadow: 0 0 5px #ff4a4aaa;
+  }
+
+  .tipo-receta {
+    font-size: 0.9rem;
+    color: #eee;
+  }
+
+  .acciones-mini {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .acciones-mini a {
+    background: rgb(228, 146, 46);
+    color: white;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 0 6px #ff0000aa;
+  }
+
+  .acciones-mini a:hover {
+    background: #cc0000;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: 0.9rem;
+    background: rgba(0,0,0,0.6);
+    color: #ccc;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    
     header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background-color: rgba(0, 0, 0, 0.7);
-      display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      gap: 1rem;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
-    }
-
-    header img.logo {
-      height: 60px;
-    }
-
-    .volver-fijo {
-      background: #ffd700;
-      color: #000;
-      padding: 0.6rem 1rem;
-      border-radius: 6px;
-      font-weight: bold;
-      text-decoration: none;
-      box-shadow: 0 0 8px #ffd700aa;
+      justify-content: flex-start;
+      gap: 0.6rem;
     }
 
     .acciones-detalle {
-      display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 0.5rem;
     }
 
-    .acciones-detalle button {
-      background: #ff5c5c;
-      color: white;
-      padding: 10px 16px;
-      border-radius: 6px;
-      border: none;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 0 6px #ff4a4a;
-    }
+      .lista-completa {
+    width: 105%;        /* ancho total de la pantalla */
+    padding-left: 0rem;  /* opcional, para que no quede pegado al borde */
+    padding-right: 0rem;
+  }
 
-    .acciones-detalle .confirmar {
-      background: #ffd700;
-      color: #000;
-    }
 
-    .container {
-      width: 98%;
-      max-width: 1600px;
-      margin: 2rem auto;
-      background: rgba(10, 10, 20, 0.85);
-      border-radius: 14px;
-      box-shadow: 0 0 40px #ff4a4aaa;
-      padding: 2rem;
-    }
+  .fila-cancion {
+    flex-direction: row;      /* fila horizontal */
+    align-items: center;      /* alinear verticalmente */
+    gap: 1rem;                /* espacio entre elementos */
+  }
 
-    .titulo-lista {
-      text-align: center;
-      color: #ffd363;
-      font-size: 2rem;
-      margin-bottom: 2rem;
-      text-shadow: 0 0 6px #ffd363aa;
-    }
+  .numero {
+    flex-shrink: 0;
+    width: 30px;
+    text-align: center;
+    font-weight: bold;
+    color: #ffd700;
+    margin-right: 0.5rem;     /* separación a la derecha para la miniatura */
+    user-select: none;
+  }
 
-    .lista-completa {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
+  .miniatura img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #ff4a4a;
+  }
 
-    .fila-cancion {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      background: rgba(20, 20, 30, 0.9);
-      padding: 1rem;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(255, 249, 214, 0.53);
-      gap: 1rem;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-      width: 100%;
-    }
-
-    .fila-cancion:hover {
-      transform: scale(1.015);
-    }
-
-    .numero {
-      width: 30px;
-      text-align: center;
-      font-weight: bold;
-      color: #ffd700;
-    }
-
-    .miniatura img {
-      width: 60px;
-      height: 60px;
-      object-fit: cover;
-      border-radius: 8px;
-      border: 2px solid #ff4a4a;
-    }
-
-    .datos {
-      flex: 1;
-      min-width: 200px;
-    }
-
-    .titulo-artista {
-      font-size: 1.1rem;
-      font-weight: bold;
-      color: #ff4a4a;
-      text-shadow: 0 0 5px #ff4a4aaa;
-    }
-
-    .tipo-receta {
-      font-size: 0.9rem;
-      color: #eee;
-    }
+  /* Opcional: ajusta .datos para que no queden apretados */
+  .datos {
+    min-width: 150px;
+    flex: 1;
+  }
 
     .acciones-mini {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 100%;
+      justify-content: space-between;
     }
+  }
+</style>
 
-    .acciones-mini a {
-      background: rgb(228, 146, 46);
-      color: white;
-      padding: 6px 12px;
-      font-size: 0.9rem;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 600;
-      text-align: center;
-      box-shadow: 0 0 6px #ff0000aa;
-    }
-
-    .acciones-mini a:hover {
-      background: #cc0000;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      font-size: 0.9rem;
-      background: rgba(0,0,0,0.6);
-      color: #ccc;
-      margin-top: 2rem;
-    }
-
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .acciones-detalle {
-        flex-direction: column;
-        align-items: stretch;
-        width: 100%;
-      }
-
-      .fila-cancion {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .acciones-mini {
-        flex-direction: row;
-        flex-wrap: wrap;
-        width: 100%;
-        justify-content: space-between;
-      }
-    }
-  </style>
 </head>
 <body>
-  <header>
-    <a href="index.php"><img src="logo.png" class="logo" alt="Logo CocinaPower" /></a>
-    <div class="acciones-detalle">
-      <button id="btn-editar"><i class="fas fa-edit"></i> Editar</button>
-      <button id="btn-agregar"><i class="fas fa-plus"></i> Agregar</button>
-      <button id="btn-eliminar"><i class="fas fa-trash"></i> Eliminar</button>
-      <button id="btn-cancelar" style="display:none;">Cancelar</button>
-      <button class="confirmar" id="confirmar-editar" style="display:none;">Editar receta seleccionada</button>
-      <button class="confirmar eliminar" id="confirmar-eliminar" style="display:none;">Eliminar recetas seleccionadas</button>
-    </div>
-    <a href="index.php" class="volver-fijo"><i class="fas fa-arrow-left"></i> Volver</a>
-  </header>
+<header>
+  <a href="index.php"><img src="logo.png" class="logo" alt="Logo CocinaPower" /></a>
+  <a href="index.php" class="volver-fijo"><i class="fas fa-arrow-left"></i> Volver</a>
+  <div class="acciones-detalle">
+    <button id="btn-editar"><i class="fas fa-edit"></i> Editar</button>
+    <button id="btn-agregar"><i class="fas fa-plus"></i> Agregar</button>
+    <button id="btn-eliminar"><i class="fas fa-trash"></i> Eliminar</button>
+    <button id="btn-cancelar" style="display:none;">Cancelar</button>
+    <button class="confirmar" id="confirmar-editar" style="display:none;">Editar receta seleccionada</button>
+    <button class="confirmar eliminar" id="confirmar-eliminar" style="display:none;">Eliminar recetas seleccionadas</button>
+  </div>
+</header>
+
 
  
   <main class="container">
