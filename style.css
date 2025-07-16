@@ -742,128 +742,43 @@ footer p {
 
 /* Para pantallas grandes (> 1200px) */
 @media (max-width: 1200px) {
+  
   .header {
-    height: auto;
+    height:auto;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
     flex-wrap: nowrap;
-    padding: 1rem 2rem; /* Más padding para que respire */
-    position: fixed;
-    width: 100%;
-    background: rgba(0,0,0,0.85); /* Opcional, para que destaque */
+    padding: 0.5rem 1rem;
+    position:fixed;
   }
-
   .container {
-    max-width: 100%;
-    width: 100%;
-    margin: 6rem auto 2rem;
-    padding: 30px 20px; /* Más espacio interno */
-    box-sizing: border-box;
+   max-width: 100%;       /* Que ocupe el 100% del ancho */
+    width: 100%;           /* Forzar que el ancho sea total */
+    margin: 6rem auto 2rem; /* Dejar margen arriba y abajo */
+    padding: 20px 15px;    /* Un poco de espacio a los lados para que no quede pegado */
+    box-sizing: border-box; /* Para que padding no haga overflow */
   }
 
   .header img.logo {
-    width: 120px !important; /* Más grande */
-    margin-top: 0px !important;
+    width: 80px !important; /* Igual que en móvil pequeño */
+    margin-top: 0px !important; /* Eliminar margen */
     transition: width 0.3s ease;
   }
 
-  .volver-fijo {
-    top: 0 !important;
-    font-size: 1.1rem !important;
-    padding: 10px 18px !important;
+    .volver-fijo {
+    top: 0px !important;
+    font-size: 0.95rem !important;
+    padding: 5px 10px !important;
     position: static !important;
     display: inline-block;
-    margin-right: auto;
-    border-radius: 8px;
-    box-shadow: 0 0 12px #ffd700cc;
+    margin-right:auto;
   }
-
   .volver-fijo i {
-    font-size: 1rem;
-  }
-
-  /* Top recetas: artículos más grandes */
-  .cancion {
-    flex-direction: row; /* para pantallas medianas, alineado horizontal */
-    height: auto;
-    gap: 20px;
-    padding: 15px;
-  }
-
-  .cancion img {
-    width: 200px; /* imagen más ancha */
-    height: 140px;
-    object-fit: cover;
-    border-radius: 12px;
-  }
-
-  .cancion .info {
-    padding: 0;
-  }
-
-  .cancion h3 {
-    font-size: 1.8rem;
-    margin-bottom: 8px;
-  }
-
-  .cancion p {
-    font-size: 1.1rem;
-  }
-
-  /* Botones de paginación más grandes */
-  .paginacion {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-  }
-
-  .btn-pag {
-    font-size: 1.1rem;
-    padding: 10px 16px;
-    border-radius: 8px;
-    background-color: #ffbb33;
-    color: #000;
-    font-weight: bold;
-    box-shadow: 0 0 8px #ffbb3377;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-  }
-
-  .btn-pag:hover {
-    background-color: #ffaa00;
-  }
-
-  .btn-pag.activo {
-    background-color: #ffaa00;
-    color: #fff;
-    cursor: default;
-  }
-
-  /* Botón ver lista completa más grande */
-  .btn-ver-lista-container {
-    text-align: center;
-    margin-top: 30px;
-  }
-
-  .btn-ver-lista {
-    display: inline-block;
-    font-size: 1.2rem;
-    padding: 12px 24px;
-    background-color: #ff5c5c;
-    color: white;
-    border-radius: 12px;
-    box-shadow: 0 0 12px #ff4a4aaa;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-  }
-
-  .btn-ver-lista:hover {
-    background-color: #cc0000;
-  }
+  font-size: 0.85rem;
 }
 
+}
 
 /* MEDIA QUERY: Tablets y móviles grandes (≤768px) */
 @media (max-width: 768px) {
