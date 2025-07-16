@@ -200,9 +200,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <div class="header detalle-header">
     <a href="index.php"><img src="logo.png" class="logo" alt="Logo CocinaPower"/></a>
+  <a href="detalle.php?id=<?= $id ?>" class="volver-fijo"><i class="fas fa-arrow-left"></i> Volver</a>
+
   </div>
 
-  <a href="detalle.php?id=<?= $id ?>" class="volver-fijo"><i class="fas fa-arrow-left"></i> Volver</a>
 
   <div class="agregar-recomendacion-container">
     <h2>Editar Recomendación del Mes</h2>
