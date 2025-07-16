@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     parse_str(parse_url($enlace, PHP_URL_QUERY), $url_params);
     $video_id = $url_params['v'] ?? '';
-    if (!$video_id && preg_match('/youtu\.be\/([a-zA-Z0-9_-]+)/', $enlace, $match)) {
+    if (!$video_id && preg_match('/youtu\.be\/([a-zA-Z0-9_-]{11})/', $enlace, $match)) {
         $video_id = $match[1];
     }
 
@@ -49,6 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <!-- Meta viewport para responsividad -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Editar Receta del Top</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="icon.png"/>
@@ -90,6 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      transition: left 0.3s ease;
     }
 
     .agregar-recomendacion-container {
@@ -99,6 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       padding: 2.5rem 2rem;
       border-radius: 14px;
       box-shadow: 0 0 30px #ff4a4aaa;
+      box-sizing: border-box;
     }
 
     .agregar-recomendacion-container h2 {
@@ -146,22 +151,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       transition: background 0.3s ease;
       box-shadow: 0 0 10px #ff4a4aaa;
       margin: 0 auto;
+      min-width: 150px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      justify-content: center;
     }
 
     .agregar-recomendacion-container button:hover {
       background: #cc0000;
-    }
-
-    .label-text {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: bold;
-      color: #ffd700;
-    }
-
-    .campo-pequeño {
-      width: 50%;
-      max-width: 500px;
     }
 
     footer {
@@ -172,19 +170,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       color: #ccc;
     }
 
+    /* Responsive */
     @media (max-width: 768px) {
-.agregar-recomendacion-container {
-    margin: 110px auto 2rem;
-    padding: 1.5rem;
-    max-width: 100%; /* NUEVO */
-    width: 100%;      /* NUEVO */
-    border-radius: 0; /* Opcional: para que no haya esquinas redondeadas en móvil */
-  }
+      .agregar-recomendacion-container {
+        margin: 110px 1rem 2rem;
+        max-width: 100%;
+        width: 100%;
+        padding: 1.5rem;
+        border-radius: 0;
+      }
 
-  .volver-fijo {
-    left: 1rem;
-    font-size: 0.9rem;
-  }
+      .volver-fijo {
+        left: 1rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .agregar-recomendacion-container {
+        margin: 130px auto 2rem;
+        padding: 1.5rem;
+      }
+      .volver-fijo {
+        left: 1rem;
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
